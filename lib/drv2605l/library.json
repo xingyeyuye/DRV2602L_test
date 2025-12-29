@@ -1,0 +1,21 @@
+{
+    "name": "DRV2605L",
+    "version": "1.0.0",
+    "description": "DRV2605L 触觉反馈驱动模块库",
+    "keywords": [
+        "drv2605l",
+        "haptic",
+        "vibration",
+        "motor"
+    ],
+    "authors": [
+        {
+            "name": "Developer"
+        }
+    ],
+    "dependencies": {
+        "SoftI2C": "*"
+    },
+    "frameworks": "arduino",
+    "platforms": "*"
+}

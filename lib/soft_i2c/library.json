@@ -1,0 +1,13 @@
+{
+    "name": "SoftI2C",
+    "version": "1.0.0",
+    "description": "软件 I2C 驱动库，使用 GPIO 模拟 I2C 通信协议",
+    "keywords": ["i2c", "soft-i2c", "gpio", "driver"],
+    "authors": [
+        {
+            "name": "Developer"
+        }
+    ],
+    "frameworks": "arduino",
+    "platforms": "*"
+}
