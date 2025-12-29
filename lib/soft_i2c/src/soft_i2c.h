@@ -18,11 +18,11 @@ class SoftI2C {
 public:
     /**
      * @brief 构造函数
-     * @param sdaPin SDA 数据线引脚
-     * @param sclPin SCL 时钟线引脚
-     * @param halfPeriodUs 半周期延时（微秒），默认5us，对应约100kHz
+     * @param sda_pin SDA 数据线引脚
+     * @param scl_pin SCL 时钟线引脚
+     * @param half_period_us 半周期延时（微秒），默认5us，对应约100kHz
      */
-    SoftI2C(uint8_t sdaPin, uint8_t sclPin, uint16_t halfPeriodUs = 5);
+    SoftI2C(uint8_t sda_pin, uint8_t scl_pin, uint16_t half_period_us = 5);
 
     /**
      * @brief 初始化 I2C 总线
@@ -32,9 +32,9 @@ public:
 
     /**
      * @brief 设置半周期延时
-     * @param halfPeriodUs 半周期延时（微秒），值越大通信越慢但越稳定
+     * @param half_period_us 半周期延时（微秒），值越大通信越慢但越稳定
      */
-    void setHalfPeriodUs(uint16_t halfPeriodUs);
+    void set_half_period_us(uint16_t half_period_us);
 
     /**
      * @brief 探测指定地址的设备是否存在
@@ -50,32 +50,32 @@ public:
      * @param value 要写入的值
      * @return true 写入成功，false 写入失败
      */
-    bool writeReg8(uint8_t address, uint8_t reg, uint8_t value);
+    bool write_reg8(uint8_t address, uint8_t reg, uint8_t value);
 
     /**
      * @brief 读取一个8位寄存器
      * @param address 7位设备地址
      * @param reg 寄存器地址
-     * @param out 输出参数，存放读取的值
+     * @param out_value 输出参数，存放读取的值
      * @return true 读取成功，false 读取失败
      */
-    bool readReg8(uint8_t address, uint8_t reg, uint8_t *out);
+    bool read_reg8(uint8_t address, uint8_t reg, uint8_t *out_value);
 
 private:
-    uint8_t sdaPin_;      ///< SDA 引脚
-    uint8_t sclPin_;      ///< SCL 引脚
-    uint16_t halfPeriodUs_; ///< 半周期延时
+    uint8_t sda_pin_;         // SDA 引脚
+    uint8_t scl_pin_;         // SCL 引脚
+    uint16_t half_period_us_; // 半周期延时
 
-    void delayHalf() const;
-    void sclHigh();
-    void sclLow();
-    void sdaLow();
-    void sdaRelease();
-    bool sdaRead() const;
+    void delay_half() const;
+    void scl_high();
+    void scl_low();
+    void sda_low();
+    void sda_release();
+    bool sda_read() const;
     void start();
     void stop();
-    bool writeByte(uint8_t data);
-    uint8_t readByte(bool ack);
+    bool write_byte(uint8_t data);
+    uint8_t read_byte(bool ack);
 };
 
 #endif // SOFT_I2C_H
