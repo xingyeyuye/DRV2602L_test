@@ -10,8 +10,8 @@
 // ============================================================================
 // 引脚配置
 // ============================================================================
-constexpr uint8_t I2C_SDA_PIN = 14;
-constexpr uint8_t I2C_SCL_PIN = 12;  // 必须使用 IO12
+constexpr uint8_t I2C_SDA_PIN = 32;
+constexpr uint8_t I2C_SCL_PIN = 33;  // 必须使用 IO12
 
 // ============================================================================
 // 全局对象
@@ -44,7 +44,7 @@ void setup() {
     }
 
     // 配置触觉驱动
-    g_haptic.select_library(3);
+    g_haptic.select_library(1);
     g_haptic.set_mode(drv2605l_mode::INTTRIG);
 
     // 读取并打印状态
@@ -66,5 +66,5 @@ void loop() {
     g_haptic.set_waveform(1, 0);  // 结束序列
     g_haptic.go();
 
-    delay(1000);
+    delay(100);
 }
