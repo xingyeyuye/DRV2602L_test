@@ -13,7 +13,7 @@ bool DRV2605L::begin() {
     if (!write_reg(drv2605l_reg::MODE, 0x00)) {
         return false;
     }
-
+ 
     // 配置默认参数
     write_reg(drv2605l_reg::RTPIN, 0x00);
     write_reg(drv2605l_reg::WAVESEQ1, 1);      // strong click
@@ -24,17 +24,20 @@ bool DRV2605L::begin() {
     write_reg(drv2605l_reg::BREAK, 0);
     write_reg(drv2605l_reg::AUDIOMAX, 0x64);
 
-    // 配置为 ERM 模式（清除 bit7 N_ERM_LRA）
+    // 配置为 LRA 模式（设置 bit7 N_ERM_LRA = 1）
     uint8_t feedback = 0;
     if (read_reg(drv2605l_reg::FEEDBACK, &feedback)) {
-        write_reg(drv2605l_reg::FEEDBACK, feedback & 0x7F);
+        write_reg(drv2605l_reg::FEEDBACK, feedback | 0x80);
     }
 
-    // 配置为 ERM 开环模式
+    // 配置为 LRA 闭环模式（清除 bit5 ERM_OPEN_LOOP）
     uint8_t control3 = 0;
     if (read_reg(drv2605l_reg::CONTROL3, &control3)) {
-        write_reg(drv2605l_reg::CONTROL3, control3 | 0x20);
+        write_reg(drv2605l_reg::CONTROL3, control3 & ~0x20);
     }
+
+    // 选择 LRA 专用波形库（库6）
+    select_library(6);
 
     return true;
 }
